@@ -1,8 +1,9 @@
 import config from 'config';
-import Cart from '../models/Cart.js';
+
 import User from '../models/user.js';
 import Order from '../models/order.js';
 import Stripe from 'stripe';
+import Cart from '../models/cart.js';
 const stripe=new Stripe('StripeAPIKey');
 
 export const get_orders = async (req,res) => {

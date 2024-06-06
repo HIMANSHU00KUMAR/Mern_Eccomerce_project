@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../utilis';
 
 interface Product {
+  _id: Key | null | undefined;
   id: string;
   title: string;
   description: string;

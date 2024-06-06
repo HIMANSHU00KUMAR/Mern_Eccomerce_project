@@ -38,7 +38,7 @@ const authSlice = createSlice({
   
   export const { setAuth, clearAuth ,setLoadingUser} = authSlice.actions;
 
-  export const loadUserDetails = () => async (dispatch, getState) => {
+  export const loadUserDetails = () => async (dispatch: (arg0: { payload: unknown; type: "auth/setAuth" | "auth/clearAuth" | "auth/setLoadingUser"; }) => void, getState: () => { (): unknown; new(): unknown; auth: { (): unknown; new(): unknown; token: unknown; }; }) => {
     dispatch(setLoadingUser(true));
     try {
       const token = getState().auth.token;

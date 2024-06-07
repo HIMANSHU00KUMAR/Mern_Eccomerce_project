@@ -1,5 +1,5 @@
 // src/components/ProductCard.tsx
-import React from 'react';
+
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -10,14 +10,18 @@ import { addCartItem } from '../../features/cartSlice';
 import { AppDispatch, RootState } from '../../App/store';
 import { BASE_URL } from '../../utilis';
 
+
+
 interface ProductCardProps {
   product: {
-    category: string;
-    description: string;
-    images: string;
-    price: number;
+    _id: string; // Ensure _id is explicitly defined as string
+    id: string;
     title: string;
-    _id: string;
+    description: string;
+    price: number;
+    stock: number;
+    category: string;
+    images: string;
   };
 }
 

@@ -1,15 +1,15 @@
 // src/components/AdminProductDetails.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteAdminProduct, fetchAdminProducts } from '../features/adminProductSlice';
-import { RootState } from '../App/store';
+import { AppDispatch, RootState } from '../App/store';
 import { BASE_URL } from '../utilis';
 
 
 const AdminProductDetails: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { products, status, error } = useSelector((state: RootState) => state.adminProduct);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+ 
 
   useEffect(() => {
     console.log("fetiching product amin wala")

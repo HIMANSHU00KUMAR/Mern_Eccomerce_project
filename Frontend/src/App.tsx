@@ -8,14 +8,13 @@ import ProductSection from './pages/ProductSection';
 import Checkout from './pages/Checkout';
 import AdminProductDetails from './pages/AdminProductDetails';
 import PrivateRoute from './component/PrivateRoute';
-
-
+import { AppDispatch } from './App/store';
 
 
 
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
  
 
   useEffect(() => {

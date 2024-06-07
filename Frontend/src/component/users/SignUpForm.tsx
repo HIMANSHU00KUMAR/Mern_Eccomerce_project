@@ -13,7 +13,7 @@ const SignUpForm: React.FC<SignUpFormProps>  = ({ switchToSignIn }) => {
   const dispatch=useDispatch();
   const { name, email, password } = useSelector((state:RootState) => state.signUp);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     // Post data to your server

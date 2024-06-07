@@ -32,8 +32,14 @@ export const addCartItem = createAsyncThunk(
     try {
       const response = await axios.post(`${BASE_URL}/api/carts/addcart/${userId}`, { productId, quantity });
       return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      } else if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue('An unknown error occurred');
+      }
     }
   }
 );
@@ -43,11 +49,17 @@ export const fetchCartItems = createAsyncThunk(
   async (userId: string, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE_URL}/api/carts/cart/${userId}`);
-      console.log("fetchcart ka data",response.data)
+      console.log("fetchcart ka data", response.data);
       return response.data;
-    } catch (error: any) {
-      console.log("error in fetching cart items")
-      return rejectWithValue(error.response.data);
+    } catch (error: unknown) {
+      console.log("error in fetching cart items");
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      } else if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue('An unknown error occurred');
+      }
     }
   }
 );
@@ -57,10 +69,16 @@ export const deleteCartItem = createAsyncThunk(
   async ({ userId, productId }: { userId: string; productId: string }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(`${BASE_URL}/api/carts/deletecart/${userId}/${productId}`);
-      console.log("delete cART Ka data ",response.data)
+      console.log("delete cART Ka data ", response.data);
       return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      } else if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue('An unknown error occurred');
+      }
     }
   }
 );

@@ -20,7 +20,7 @@ export default function AccountMenu() {
     dispatch(setLoadingUser(false));
   };
   console.log("user ka detail accountmenu mae use keyae",user)
-  console.log("user ka pehla ltr = ",user.name.charAt(0).toUpperCase())
+  console.log("user ka pehla ltr = ",user?.name.charAt(0).toUpperCase())
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>

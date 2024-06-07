@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmail,setPassword,resetForm } from '../../features/signInSlice';
-import { RootState } from '../../App/store';
+import { AppDispatch, RootState } from '../../App/store';
 import axios from 'axios';
 import { loadUserDetails, setAuth } from '../../features/authSlice';
 import { BASE_URL } from '../../utilis';
@@ -13,7 +13,7 @@ interface SignInFormProps {
 }
 
 const SignInForm: React.FC<SignInFormProps> = ({ switchToSignUp }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { email, password } = useSelector((state:RootState ) => state.signIn);
 
   const handleSubmit = async (e: React.FormEvent) => {

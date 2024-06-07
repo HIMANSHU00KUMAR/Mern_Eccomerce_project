@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../App/store';
-import { deleteCartItem, fetchCartItems, resetCart } from '../features/cartSlice';
+import { AppDispatch, RootState } from '../App/store';
+import { deleteCartItem, fetchCartItems } from '../features/cartSlice';
 import { BASE_URL } from '../utilis';
 
 
 
 const Checkout: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalAmount = useSelector((state: RootState) => state.cart.bill);
   const cartStatus = useSelector((state: RootState) => state.cart.status);
@@ -25,7 +25,10 @@ const Checkout: React.FC = () => {
   console.log("checkout sae totalamout = ",totalAmount)
 
   const handleDelete = (productId: string) => {
-    dispatch(deleteCartItem({ userId, productId }));
+    if(userId){
+      dispatch(deleteCartItem({ userId, productId }));
+    }
+    
   };
 
   if (cartStatus === 'loading') {

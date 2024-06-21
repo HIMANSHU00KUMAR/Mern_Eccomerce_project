@@ -12,7 +12,7 @@ export const get_product = async (req,res) => {
 
 
 export const post_product = (req,res) => {
-  let image_filename=`${req.file.filename}`;
+  let image_filename=`${req.file.path}`;
   const newProduct = new Product({
       title:req.body.title,
       description:req.body.description,
@@ -41,7 +41,6 @@ export const update_product= async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No product with id: ${id}`);
 
   const updatedProduct = { title, description, price,  stock,  category,  images , _id: id };
-
   await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
 
   res.json(updatedProduct);

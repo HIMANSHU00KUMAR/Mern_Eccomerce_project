@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteAdminProduct, fetchAdminProducts } from '../features/adminProductSlice';
 import { AppDispatch, RootState } from '../App/store';
-import { BASE_URL } from '../utilis';
+
 
 
 const AdminProductDetails: React.FC = () => {
@@ -48,7 +48,7 @@ const AdminProductDetails: React.FC = () => {
             <p>Category: {product.category}</p>
             <div className="product-images flex space-x-2 mt-2">
               
-                <img   src={`${BASE_URL}/image/${product.images}`} alt={product.title} className="w-16 h-16 object-cover" />
+                <img src={product.images} alt={product.title} className="w-16 h-16 object-cover" />
              
             </div>
             <div className="mt-2 flex space-x-2">

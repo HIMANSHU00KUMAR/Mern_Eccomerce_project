@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../App/store';
 import { deleteCartItem, fetchCartItems } from '../features/cartSlice';
-import { BASE_URL } from '../utilis';
+
 
 
 
@@ -53,7 +53,7 @@ const Checkout: React.FC = () => {
                     
                   <div key={item.productId} className="flex justify-between items-center p-2 border-b">
                     <div className="flex items-center">
-                      <img src={`${BASE_URL}/image/${item.image}`} alt={item.name} className="w-16 h-16 object-cover rounded" />
+                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
                       <div className="ml-4">
                         <h2 className="text-lg font-semibold">{item.name}</h2>
                         <p className="text-gray-600">Quantity: {item.quantity}</p>

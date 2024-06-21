@@ -98,7 +98,7 @@ const ProductSection: React.FC = () => {
           </Button>
           <Button
             variant={selectedCategory === 'kid' ? 'contained' : 'outlined'}
-            onClick={() => handleCategoryChange('kid')}
+            onClick={() => handleCategoryChange('child')}
           >
             Kids
           </Button>

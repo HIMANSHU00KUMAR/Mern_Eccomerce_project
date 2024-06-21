@@ -1,12 +1,26 @@
 import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
 
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/image'); // Replace with desired directory path for uploads
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+dotenv.config();
+
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configure Cloudinary Storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: '/upload', // Optional folder name in Cloudinary
+    allowed_formats: ['jpg', 'png', 'jpeg'],
+    public_id: (req, file) => Date.now() + '-' + file.originalname,
   },
 });
 

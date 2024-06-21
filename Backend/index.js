@@ -12,7 +12,16 @@ import userRoute from './routes/userRoute.js';
 
 const PORT = process.env.PORT || 5000;
 const app = express();
-app.use(cors()); 
+const options = [
+  cors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+];
+
+app.use(options);
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
 dbConnect();

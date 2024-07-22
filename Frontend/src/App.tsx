@@ -9,7 +9,6 @@ import Checkout from './pages/Checkout';
 import AdminProductDetails from './pages/AdminProductDetails';
 import PrivateRoute from './component/PrivateRoute';
 import { AppDispatch } from './App/store';
-import Test from './pages/Test';
 
 
 

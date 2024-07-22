@@ -1,7 +1,5 @@
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
-import  config from 'config';
-import bcrypt from 'bcrypt'
 
 const ADMIN_SECRET_KEY = "your_admin_secret_key"; 
 
@@ -18,8 +16,8 @@ export const Adminsignup = async(req,res) => {
         return res.status(400).json({ message: 'User already exists' });
       }
       const user = new User({ name, email, password, isAdmin: true });
-      await user.save();
-      res.status(201).json({json, message: 'Admin registered successfully' });
+      const response=await user.save();
+      res.status(201).json({json, message: 'Admin registered successfully',response});
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
@@ -64,7 +62,6 @@ export const login = async (req,res) => {
         const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, 'your_jwt_secret', {
             expiresIn: '1h'
         });
-
         res.json({ message: 'Login successful', user: { id: user._id, name: user.name, email: user.email ,token:token} });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });

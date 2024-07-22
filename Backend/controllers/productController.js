@@ -58,3 +58,17 @@ const { id } = req.params;
 
   res.json({ message: "Product deleted successfully." });
 };
+
+export const search_product=async (req, res) => {
+  const { search } = req.query;
+  try {
+    const products = await Product.find(
+      search ? { title: { $regex: search, $options: 'i' } } : {}
+    );
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+

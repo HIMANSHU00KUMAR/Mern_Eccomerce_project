@@ -9,6 +9,7 @@ import Checkout from './pages/Checkout';
 import AdminProductDetails from './pages/AdminProductDetails';
 import PrivateRoute from './component/PrivateRoute';
 import { AppDispatch } from './App/store';
+import Test from './pages/Test';
 
 
 
@@ -42,6 +43,7 @@ const App = () => {
           path="/product-details"
           element={<PrivateRoute element={<AdminProductDetails />} />}
         />
+        
       </Routes>
     </BrowserRouter>
   

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../App/store';
+import { fetchProducts } from '../features/productSlice';
+import ProductCard from '../component/product/ProductCard';
+import { Link, useLocation } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
-import { fetchProducts } from '../features/productSlice';
-import ProductCard from '../component/product/ProductCard';
-import { Link, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import SearchBar from '../component/layout/SearchBar';
+
 
 // Helper function to get query parameters
 const useQuery = () => {
@@ -22,11 +24,11 @@ const ProductSection: React.FC = () => {
   const query = useQuery();
   const categoryQuery = query.get('category');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
 
   useEffect(() => {
     if (categoryQuery) {
@@ -34,15 +36,19 @@ const ProductSection: React.FC = () => {
     }
   }, [categoryQuery]);
 
-  console.log("productsection ka productlist = ", products);
-
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category.toLowerCase());
   };
 
-  const filteredProducts = selectedCategory === 'all'
-    ? products
-    : products.filter(product => product.category.toLowerCase() === selectedCategory);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value.toLowerCase());
+  };
+
+  const filteredProducts = products.filter(product => {
+    const matchesCategory = selectedCategory === 'all' || product.category.toLowerCase() === selectedCategory;
+    const matchesSearchTerm = product.title.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm);
+    return matchesCategory && matchesSearchTerm;
+  });
 
   let content;
 
@@ -53,7 +59,7 @@ const ProductSection: React.FC = () => {
       <Grid container spacing={4}>
         {filteredProducts.map((product) => (
           <Grid item key={product._id ?? ''} xs={12} sm={6} md={4}>
-               <ProductCard product={{ ...product, _id: product._id?.toString() ?? '' }} />
+            <ProductCard product={{ ...product, _id: product._id?.toString() ?? '' }} />
           </Grid>
         ))}
       </Grid>
@@ -77,6 +83,8 @@ const ProductSection: React.FC = () => {
           Products
         </Typography>
 
+        <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+
         <div className="flex justify-center space-x-4 mb-4">
           <Button
             variant={selectedCategory === 'all' ? 'contained' : 'outlined'}
@@ -97,7 +105,7 @@ const ProductSection: React.FC = () => {
             Women
           </Button>
           <Button
-            variant={selectedCategory === 'kid' ? 'contained' : 'outlined'}
+            variant={selectedCategory === 'child' ? 'contained' : 'outlined'}
             onClick={() => handleCategoryChange('child')}
           >
             Kids

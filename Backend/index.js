@@ -5,7 +5,6 @@ import cors from 'cors';
 import productRoute from './routes/productRoute.js';
 import itemRoute from './routes/itemRoute.js';
 import cartRoute from './routes/cartRoute.js';
-import orderRoute from './routes/orderRoute.js';
 import userRoute from './routes/userRoute.js';
 
 
@@ -32,7 +31,6 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 // app.use(isAuth);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
-app.use("/api/orders", orderRoute);
 app.use("/api/carts",cartRoute);
 app.use("/api/items",itemRoute);
 

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { AppDispatch, RootState } from "../../App/store";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from "../../features/productSlice";
+import { Link } from "react-router-dom";
 
 
 const Landing3:React.FC= () => {
@@ -22,6 +23,7 @@ const Landing3:React.FC= () => {
 
         {products.slice(0, 3).map(product => (
           <div key={product._id} className="mb-5 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+            <Link to={`/single-product/${product._id}`}>
             <div className="max-w-xs mx-auto">
               <img className="p-2 w-full h-64 bg-[#E5E2DD] object-cover" src={product.images} alt={product.title} />
               <div className="flex flex-col ml-2 my-2">
@@ -30,6 +32,7 @@ const Landing3:React.FC= () => {
                 <span>${product.price}</span>
               </div>
             </div>
+            </Link>
           </div>
         ))}
 

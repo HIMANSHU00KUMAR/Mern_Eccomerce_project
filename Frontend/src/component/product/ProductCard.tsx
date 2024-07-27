@@ -4,12 +4,7 @@ import { addCartItem } from '../../features/cartSlice';
 import { AppDispatch, RootState } from '../../App/store';
 import { useState } from 'react';
 import {  MinusOutlined, PlusOutlined, ShoppingCartOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
-
-
-
-
-
-
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   product: {
@@ -72,6 +67,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg shadow-sm max-w-[287px]">
+       <Link to={`/single-product/${productId}`}>
+
       <div className="flex flex-col justify-center items-center bg-gray-300 rounded-lg aspect-square">
         <div className="flex overflow-hidden relative flex-col w-full aspect-square">
           <img
@@ -83,6 +80,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="relative shrink-0 bg-white bg-opacity-0 h-[127px]" />
         </div>
       </div>
+      </Link>
       <div className="flex gap-2.5 justify-between mt-2 w-full">
         <div className="flex gap-1 my-auto">
         <StarFilled style={{ fontSize: '13px' }} />

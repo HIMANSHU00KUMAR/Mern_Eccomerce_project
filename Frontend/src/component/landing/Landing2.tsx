@@ -39,7 +39,7 @@ const Landing2: React.FC = () => {
             <span className="capitalize font-semibold text-sm">hot deals</span>
             <span className="uppercase font-bold text-xl">Child's Collection</span>
             <div>
-              <Link to="/product?category=kid">
+              <Link to="/product?category=child">
                 <button className="uppercase font-medium text-lg text-red-500 border-b-2 border-red-600 mt-2">shop now</button>
               </Link>
             </div>
